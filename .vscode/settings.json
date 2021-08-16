@@ -14,5 +14,13 @@
     },
     "editor.suggest.insertMode": "replace",
     "gitlens.codeLens.scopes": ["document"]
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "gitlens.codeLens.scopes": ["document"]
   }
 }
