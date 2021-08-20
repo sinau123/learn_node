@@ -4,16 +4,32 @@
   "description": "",
   "main": "./src/main.js",
   "scripts": {
-    "start": "nodemon --delay 500ms ./src/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "env NODE_ENV=production node ./src/main.js",
+    "start": "run-s tailwind:build serve",
+    "dev": "run-p watch:tailwind tailwind:build-dev serve-dev",
+    "serve-dev": "nodemon --delay 500ms ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind:build-dev": "postcss src/assets/css/tailwind.css -o src/public/css/style.css",
+    "minify:css": "minify src/public/css/style.css > src/public/css/style.min.css",
+    "tailwind:build": "run-s tailwind:build-dev minify:css",
+    "ejs:lint": "ejslint src/views/404.ejs",
+    "watch:tailwind": "onchange 'src/**/*.ejs' 'src/assets/css/*.css' -- yarn tailwind:build-dev"
   },
   "packageManager": "yarn@3.0.1",
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "autoprefixer": "latest",
+    "minify": "^7.0.2",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "postcss": "latest",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "latest"
   },
   "dependencies": {
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
     "module-alias": "^2.2.2"
   },
